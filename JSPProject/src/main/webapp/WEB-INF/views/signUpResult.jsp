@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 가입 결과</title>
+<link rel="stylesheet" href="<%= request.getContextPath()%>/css/style.css">
 </head>
 <body>	
 	<!-- 비밀번호/확인이 일치하지 않는 경우
@@ -54,5 +55,6 @@
 		</ul>
 		<h3><%=memberName %>의 회원가입이 완료되었습니다.</h3>
 	<% } %>
+	
 </body>
 </html>
