@@ -143,7 +143,7 @@ public class ServletEx1 extends HttpServlet{
 <h2><details>
 <summary>응답화면</summary>
 
-![display : block 예시](images/getpost/response.png)
+![Servlet 응답](images/getpost/response.png)
 </details></h2>
 
 ## 6. 응답 종료 시 HttpServletRequest, HttpServletResponse 객체 소멸

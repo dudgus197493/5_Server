@@ -97,9 +97,13 @@
     - 스크립틀릿(scriptlet)
         ```java
         <% 자바코드 %>
+        <% 
+          String memberId = request.getParameter("memberId); // 변수 선언 가능 
+        %>
         ``` 
     - 출력식, 표현식(expression)
         ```java
         <%= 자바코드 %>
-        ``` 
-  
+        <%= memberId %> // 화면에 memberId 출력
+        ```
+    
