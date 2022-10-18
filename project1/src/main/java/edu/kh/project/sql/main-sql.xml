@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	
+	<!-- 게시판 종류 조회 DAO -->
+	<entry key="selectBoardType">
+		SELECT * FROM BOARD_TYPE ORDER BY 1
+	</entry>
+</properties>

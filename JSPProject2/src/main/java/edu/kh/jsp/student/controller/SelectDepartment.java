@@ -32,5 +32,4 @@ public class SelectDepartment extends HttpServlet{
 			e.printStackTrace();
 		}
 	}
-	
 }
