@@ -148,4 +148,39 @@ public class ServletEx1 extends HttpServlet{
 
 ## 6. 응답 종료 시 HttpServletRequest, HttpServletResponse 객체 소멸
 
+<br>
 
+## 하나의 서블릿으로 여러가지 요청
+```Java
+@WebServlet("/elTest")
+public class ELTestServlet extends HttpServlet{
+	
+	// **데이터 전달 방식에 따라서 하나의 요청 주소로 여러가지 처리 가능**
+	
+	// a태그 요청(GET)
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/el/elTest.jsp");
+		
+		// WEB-INF 폴더는 외부 요청을 통해서 접근이 불가
+		// 단, 내부 요청(Servlet, JSP에서의 직접 접근)은 가능
+		
+		dispatcher.forward(req, resp);
+	}
+	// form태그 요청(POST)
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/el/elTest.jsp");
+		
+		// JSP로 요청 위임
+		dispatcher.forward(req, resp);
+	}
+}
+```
+데이터 전달방식이 다르다면 하나의 서블릿으로 여러가지 요청 처리 가능
+|요청방법|주로 수행하는 기능|
+|:--:|:--:|
+|GET|SELECT|
+|POST|INSERT|
+|PUT|UPDATE|
+|DElETE|DELETE|

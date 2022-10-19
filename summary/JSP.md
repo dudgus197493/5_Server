@@ -106,4 +106,20 @@
         <%= 자바코드 %>
         <%= memberId %> // 화면에 memberId 출력
         ```
-    
+<br>
+
+## RequestDispatcher
+> ### 요청을 **위임**하는 역할을 하는 객체
+> ### 요청에 대한 응답화면(프레젠테이션 로직)을 출력하는 역할을 위임하는 객체
+```Java
+RequestDispatcher dispatcher = req.getRequestDispatcher("JSP 경로"); // RequestDispatcher 객체 생성
+
+req.setAttribute("data", "Example Data"); // 응답할 데이터 세팅
+
+dispatcher.forward(req, resp); // req, resp을 매개변수로 담아 포워딩
+```
+- ### forward
+  - JSP가 요청 데이터(req)를 이용해 화면을 만들고 클라이언트에게 응답(resp)하기 위해 HttpServletRequest, HttpServletResponse를 매개변수로 전달  
+  - 페이지 이동이 아닌 Servlet의 역할 중 응답화면 출력 역할을 분업한 JSP에게 req, resp를 전달만 하는 것
+
+
