@@ -64,4 +64,35 @@ public class MemberDAO {
 		}
 		return loginMember;
 	}
+
+	/** 회원 가입 DAO
+	 * @param conn
+	 * @param member
+	 * @return result
+	 * @throws Exception
+	 */
+	public int signUp(Connection conn, Member member) throws Exception{
+		// INSERT INTO "MEMBER" 
+//		VALUES(SEQ_MEMBER_NO.NEXTVAL, 'user01@kh.or.kr', 'pass01!', '유저일', '01012345678', '04540,,서울시 중구 남대문로 120,,2층',
+//				DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+		int result = 0;
+		try {
+			String sql = prop.getProperty("signUp");
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, member.getMemberEmail());
+			pstmt.setString(2, member.getMemberPw());
+			pstmt.setString(3, member.getMemberNickname());
+			pstmt.setString(4, member.getMemberTel());
+			pstmt.setString(5, member.getMemberAddress());
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }

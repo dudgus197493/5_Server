@@ -15,6 +15,14 @@ import edu.kh.project.member.model.vo.Member;
 
 @WebServlet("/member/login")
 public class LoginServlet extends HttpServlet{
+	
+	// 로그인 페이지로 응답(forward)
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.getRequestDispatcher("/WEB-INF/views/member/login.jsp").forward(req, resp);
+		
+	}
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
@@ -78,7 +86,10 @@ public class LoginServlet extends HttpServlet{
 			// 1) HttpSession 객체 얻어오기
 			HttpSession session = req.getSession();
 			
+			String path = "";	// 로그인 성공/실패에 따라 이동할 경로를 저장할 변수
+			
 			if(loginMember != null) { // 로그인 성공 시
+				path = "/";	// 메인 페이지
 				
 				// 2) Session scope에 속성 추가하기
 				session.setAttribute("loginMember", loginMember);
@@ -131,13 +142,24 @@ public class LoginServlet extends HttpServlet{
 				
 				// ---------------------------------------------------------------
 			} else {				  // 로그인 실패 시
+				// 현재 요청 이전의 페이지 주소를 Request Header에서 얻어옴
+				path = req.getHeader("referer");
 				session.setAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다.");
 			}
 			
-			
-			resp.sendRedirect("/");
+			// path가 "/" 일 경우 메인페이지로 재요청
+			resp.sendRedirect(path);
 		}catch(Exception e) {
 			e.printStackTrace();
+			
+			// 에러 발생 시 에러 페이지로 forward
+			String errorMessage = "로그인 중 문제가 발생했습니다.";
+			
+			req.setAttribute("errorMessage", errorMessage);
+			req.setAttribute("e", e);
+			
+			String path = "/WEB-INF/views/common/error.jsp";
+			req.getRequestDispatcher(path).forward(req, resp);
 		}
 	}
 }

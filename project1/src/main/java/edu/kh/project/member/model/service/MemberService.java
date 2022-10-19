@@ -2,6 +2,8 @@ package edu.kh.project.member.model.service;
 
 import static edu.kh.project.common.JDBCTemplate.getConnection;
 import static edu.kh.project.common.JDBCTemplate.close;
+import static edu.kh.project.common.JDBCTemplate.commit;
+import static edu.kh.project.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 
@@ -30,5 +32,21 @@ public class MemberService {
 		return loginMember;
 	}
 
-	
+	/** 회원 가입 서비스
+	 * @param member
+	 * @return result
+	 * @throws Exception
+	 */
+	public int signUp(Member member) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = dao.signUp(conn, member);
+		
+		if(result > 0) commit(conn); 
+		else		   rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
 }

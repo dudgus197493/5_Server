@@ -20,5 +20,18 @@
 
 <%-- session scope에 message 속성이 존재하는 경우
      alert창을 이용해서 내용 출력
+     
  --%>
+<c:if test="${not empty sessionScope.message}">
+        <script>
+            alert("${sessionScope.message}");
+        </script>
 
+        <%-- message 1회 출력 후 session scope에서 삭제 --%>
+        <c:remove var="message" scope="session"/>
+    </c:if>
+    <%-- alert메세지를 footer에 작성하는 이유
+        - header or footer는 모든 페이지에 include 될것이다.
+        - header는 너무 복잡하다.
+        - 페이지 윗부분에서 alert가 실행되면 뒷부분의 로딩이 멈춘다.
+    --%>
