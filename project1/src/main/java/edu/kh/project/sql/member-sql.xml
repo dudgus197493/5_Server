@@ -18,4 +18,13 @@
 	VALUES(SEQ_MEMBER_NO.NEXTVAL, ?, ?, ?, ?, ?,
 			DEFAULT, DEFAULT, DEFAULT, DEFAULT)
 	</entry>
+	<!-- 회원 가입 -->
+	<entry key="updateMember">
+		UPDATE "MEMBER" SET
+		MEMBER_NICKNAME = ?,
+		MEMBER_TEL = ?,
+		MEMBER_ADDRESS = ?
+		WHERE MEMBER_NO = ?
+	</entry>
+	
 </properties>

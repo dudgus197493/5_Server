@@ -95,4 +95,38 @@ public class MemberDAO {
 		
 		return result;
 	}
+
+	/** 회원 정보 수정 DAO
+	 * @param conn
+	 * @param member
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updateMember(Connection conn, Member member) throws Exception {
+		
+//		-- 회원 정보 수정
+//		UPDATE "MEMBRE" SET
+//		MEMBER_NICKNAME = '변경된 닉네임',
+//		MEMBER_TEL = '01012345678';
+//		MEMBER_ADDRESS = '12345,,서울,,어딘가'
+//		WHERE MEMBER_NO = 4; -- 로그인한 회원의 번호
+		int result = 0;
+		try {
+			String sql = prop.getProperty("updateMember");
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, member.getMemberNickname());
+			pstmt.setString(2, member.getMemberTel());
+			pstmt.setString(3, member.getMemberAddress());
+			pstmt.setInt(4, member.getMemberNo());
+						
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }

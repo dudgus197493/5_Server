@@ -8,3 +8,12 @@ FROM "MEMBER"
 WHERE MEMBER_DEL_FL = 'N'
 AND MEMBER_EMAIL = 'user01@kh.or.kr'
 AND MEMBER_PW = 'pass01!';
+
+-- 회원 정보 수정
+UPDATE "MEMBRE" SET
+MEMBER_NICKNAME = '변경된 닉네임',
+MEMBER_TEL = '01012345678';
+MEMBER_ADDRESS = '12345,,서울,,어딘가'
+WHERE MEMBER_NO = 4; -- 로그인한 회원의 번호
+
+SELECT * FROM "MEMBER";
